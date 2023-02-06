@@ -1,0 +1,628 @@
+*{
+    margin: 0;
+    padding: 0;
+    /* border: none; */
+     overflow: scroll; 
+}
+*::-webkit-scrollbar{
+    display: none;
+}
+body{
+    font-family: "Montserrat", sans-serif;
+    /* overflow: hidden; */
+  
+}
+#container{
+    position: fixed;
+    height: 100vh;
+    width: 2000px;
+    display: flex;
+    justify-content:space-evenly;
+    align-items: center;
+    flex-direction:row;
+  
+    /* background-color: blueviolet; */
+}
+#navi_bar{
+    width:130px;
+    height:1020px;
+    background-color: #373B53;
+    border-radius: 0px 0px 20px 0px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+}
+#invoice_div{
+    width:1880px;
+    height:1020px;
+    background: #F2F2F2;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+.navi_top_div{
+    height: 130px;
+    width: 130px;
+    background-color: #7C5DFA;
+    border-radius: 0px 20px 20px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.navi_bottom_div{
+    height:890px;
+    width:130px;
+}
+.nav_logo_svg{
+    height:45px;
+    width: 45px;
+}
+.invoice_detail_div{
+    height:1000px;
+    width:1200px;
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+    flex-direction: column;
+    background: #F2F2F2;
+}
+.emptyImage{
+    height:500px;
+    width: 500px;
+    margin-top:230px;
+}
+.date_div{
+    height:80px;
+    width:240px;
+    display:flex;
+    justify-content:space-between;
+    align-items: flex-start;
+    flex-direction:column;
+}
+.invoice_header_div{
+    height:100px;
+    width:1200px;
+    display:flex;
+    justify-content:space-evenly;
+    align-items: center;
+    flex-direction:row;
+}
+.invoice_list_div{
+    display:inline;
+    overflow: scroll;
+}
+.invoice_list_div::-webkit-scrollbar{
+    display: none;
+}
+.invoice_heading_div{
+    width:800px; 
+    margin-left:-200px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction:column;
+}
+.invoice_heading_div h1{
+    font-size:2.5em;
+}
+#filterArrow{
+    width: 200px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction:row;
+}
+.invoice_filter_div{
+    height: 100px;
+    width:300px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction:column;
+    /* background-color: rgb(217, 250, 215); */
+}
+.arrowDown{
+    cursor: pointer;
+}
+#filter_Div{
+    position: fixed;
+    height: 50px;
+    width:320px;
+    font-size: 18px;
+    display:none;
+    background-color: #fff;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction:row;
+}
+.invoice_create_div{
+    height: 50px;
+    width:180px;
+    color: #ffffff;
+    border-radius: 24px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction:row;
+    background-color:#7C5DFA;
+    cursor: pointer;
+    margin-left:20px;
+}
+.invoice_plus_icon_div{
+    height: 30px;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: #ffffff;
+}
+.invoice_list_element{
+    height: 80px;
+    width: 1000px;
+    display:grid;
+    grid-template-columns:repeat(6,19%);;
+    grid-template-rows:100%;
+    text-align: center;
+    background: #FFFFFF;
+  box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.100397);
+  border-radius: 8px;
+color: #858BB2;
+margin-top:20px;
+}
+#align_invoice_element{
+    margin-top:15%;
+}
+.statusDiv_point{
+    background-color: #FF8F00;
+}
+.paidPoint{
+    background-color: #22eba8;
+}
+.draftPoint{
+    background-color: #373B53;
+}
+#statusDivIdPoint{
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+}
+#statusDivIdPointshow{
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+}
+#statusDivIdDiv{
+    height:50px;
+    width: 180px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction:row;
+    margin-top:0%;
+}
+#statusDivId{
+    height:50px;
+    width: 180px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction:row;
+    margin-top:8%;
+}
+.statusDiv{
+    color: #FF8F00;
+    border-radius:10px;
+    background-color: #fcf5ed;;
+}
+.paid{
+    color:#33D69F;
+    border-radius:10px;
+    background-color:#eafef7;
+}
+.draft{
+    color:#373B53;
+    border-radius:10px;
+    background-color:#e2e2e4;
+}
+.invoice_list_element ,.invoice_list_element h3{
+color: #373B53;
+}
+#new_invoice_whole_container,#new_invoice_whole_container_for_Edit{
+    position: absolute;
+    height:1020px;
+    width: 2000px;
+    display: flex;
+    justify-content:space-evenly;
+    align-items: center;
+    flex-direction: row;
+    margin-left:-2150px;
+    transition:2s;
+}
+#new_invoice_container{
+  
+    height:1020px;
+    width:570px;
+    background-color: rgb(251, 251, 250);
+    text-align:left;
+  
+    border-radius: 0px 20px 20px 0px;
+    
+}
+.bill_from input,.bill_to input{
+    height: 47px;
+    width:145px;
+}
+.item_list{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: row;
+}
+#clientname,#clientEmail,#street_AddressTo,#street_Address,#description{
+    height:47px;
+    width:500px;
+}
+#createdAt,#paymentDue{
+    height:47px;
+    width: 240px;
+}
+.add_item_button{
+    height:47px;
+    width:500px;
+    border-radius:10px;
+    font-size: large;
+    cursor: pointer;
+}
+.bill_from{
+   height:130px;
+   width:570px;
+   display: flex;
+   justify-content: space-evenly;
+   align-items: center;
+   flex-direction:row;
+   flex-wrap:wrap;
+}
+.bill_to{
+    height:430px;
+   width:570px;
+   display: flex;
+   justify-content: space-evenly;
+   align-items: center;
+   flex-direction:row;
+   flex-wrap:wrap;
+}
+.text_invoice{
+    margin-top: 2px;
+    margin-left:40px;
+    margin-bottom: 1%;
+}
+#blueText{
+    color:#7C5DFA;
+}
+.item_list_container{
+    display: flex;
+    justify-content: space-evenly;
+    align-items:center;
+    flex-direction: column;
+
+}
+#deleteIcon{
+    cursor: pointer;
+}
+.item_list_names{
+    height:50px;
+    width:500px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items:center;
+    flex-direction:row;
+}
+.item_list{
+    height:140px;
+    width:500px;
+    display:inline;
+    overflow: scroll;
+}
+.item_list::-webkit-scrollbar{
+    display: none;
+}
+.item_list div{
+    height:50px;
+    width:500px;
+    height:50px;
+    width:500px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items:center;
+    flex-direction:row;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.item_list input{
+    height:47px;
+    width:100px;
+}
+.invoice_button{
+    height:47px;
+    width:150px;
+    border: none;
+    color: #121111;
+    border-radius: 22px;
+    cursor: pointer;
+}
+.invoice_button_div{
+    height:70px;
+    width:500px;
+    margin-left:40px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items:center;
+    flex-direction:row;
+    cursor: pointer;
+}
+#new_invoice_blur_container{
+    height:1020px;
+    width:1430px;
+    background-color: rgb(0,0,0,.6);
+}
+#invoice_status_show_div{
+    height:1000px;
+    width:1000px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+}
+#pendingButton{
+    background-color: #7C5DFA;
+    color: #fff;
+}
+#draftButton{
+    background-color:#373B53;
+    color: #fff;
+}
+.go_back_button_div{
+height:50px;
+width: 1000px;
+cursor: pointer;
+}
+.status_button_div{
+height: 80px;
+width: 1000px;
+cursor: pointer;
+/* background-color: #7C5DFA; */
+display: flex;
+justify-content: space-between;
+align-items:center;
+flex-direction:row;
+background-color: #FFFFFF;
+box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.100397);
+border-radius: 8px;
+}
+.status_detail_div{
+height:620px;
+width: 1000px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.100397);
+border-radius: 8px;
+}
+.go_back_div{
+    height:50px;
+    width:150px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-evenly;
+    align-items:center;
+    flex-direction: row;
+}
+.goback_btn{
+    font-size:large;
+    border: none;
+    background: none;
+}
+.current_status_text_div{
+    height:80px;
+    width:300px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: row;
+}
+.current_status_text_div p{
+    color:#858BB2
+}
+.Edit_delete_btndiv{
+    height:80px;
+    width:500px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: row;
+}
+.edit_btn{
+    font-size:18px;
+    height:50px;
+    width:100px;
+    border-radius: 22px;
+    color: #7E88C3;
+    border: none;
+    cursor: pointer;
+}
+.delete_btn{
+    font-size:18px;
+    height:50px;
+    width:140px;
+    border-radius: 22px;
+    color: #ffffff;
+    background-color: #EC5757;
+    border: none;
+    cursor: pointer;
+}
+.paid_btn{
+    font-size:18px;
+    height:50px;
+    width:160px;
+    border-radius: 22px;
+    background-color: #7C5DFA;
+     color: #FFFFFF;
+     border: none;
+     cursor: pointer;
+}
+.status_client_detail_div{
+    height:270px;
+    width:1000px;
+    padding:30px;
+    display: grid;
+    grid-template-columns:33% 33% 33%;
+    grid-template-rows:50% 50%;
+}
+.invoice_date_div{
+    display: flex;
+    justify-content: space-evenly;
+    /* align-items:center; */
+    flex-direction:column;
+    grid-area:2/1/2/1;
+}
+.status_from_address_detail_div{
+    grid-area:1/3/1/3;
+}
+.status_to_address_detail_div{
+    margin-top:10px;
+    grid-area:2/2/2/2;
+}
+.email_div{
+    grid-area:2/3/2/3;
+}
+.invoice_text{
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+.status_id_decript_div{
+    height: 80px;
+display: flex;
+justify-content:space-evenly;
+flex-direction:column;
+}
+table{
+    width:900px;
+    margin:3%; 
+    overflow: scroll;
+    text-align: center;
+    border:none;
+    border-collapse:collapse;
+  }
+  td{
+    height:50px;
+    width:200px;
+    color: #373B53;
+    
+  }
+  th{
+   
+   height:50px;
+    width:700px;
+    color: #DFE3FA;
+    
+   }
+   .total_amount_div{
+    height:100px;
+    width:900px;
+    display:grid;
+    grid-template-columns:50% 50%;
+    grid-template-rows:100%;
+    text-align: center;
+    background-color: #373B53;
+    color: #FFFFFF;
+   }
+   .total_div{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+   }
+   .amount_due_text{
+    margin-top: 30px;
+   text-align: left;
+   margin-left: 10px;
+   }
+   .amount_text{
+    margin-top: 30px;
+text-align: right;
+margin-right: 10px;
+   }
+   .form_status_show_div{
+    height: 200px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+   }
+   #delete_div{
+position: absolute;
+visibility:hidden;
+padding:50px;
+height: 200px;
+width:500px;
+color:#888EB0;
+border-radius:8px;
+background: #ffffff;
+box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.100397);
+display: grid;
+/* grid-template-columns:; */
+   }
+.delete_button_div button{
+color:#7E88C3;
+height:51px;
+width:90px;
+background-color: #F9FAFE;
+border:none;
+border-radius:24px;
+cursor: pointer;
+   }
+   .delete_button_div{
+    margin-left:250px;
+   }
+   #delete_button{
+    color: #FFFFFF;
+background-color: #EC5757;
+cursor: pointer;
+   }
+   #delete_div h2{
+    color:black;
+   }
+   #invoice_blur_div{
+    position: absolute;
+    visibility: hidden;
+    height:1020px;
+    width:1740px;
+    background-color: rgb(0,0,0,.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   }
+   .navi_bottom_div{
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows:repeat(6,17%);
+    text-align: center;
+   }
+   .avatar_img{
+    height:100px;
+    width: 100px;
+    border-radius:100%;
+    grid-area: 6/1/6/1;
+    margin: auto;
+   }
+   .sun_img{
+    grid-area: 5/1/5/1;
+    margin: auto;
+    cursor: pointer;
+   }
+   .arrow{
+    text-align: center;
+    height:14px;
+    width: 14px;
+    cursor: pointer;
+   }

@@ -1,0 +1,105 @@
+<link href="CSS/index.css" id="displayMode" rel="stylesheet" type="text/css" />
+<link
+  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap"
+  rel="stylesheet"
+/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<div id="container">
+    <div id="navi_bar">
+   
+        <%- include('./partials/navibar');%>
+        <%- include('./partials/newInvoiceStatus');%>
+    </div>
+  
+    <div id="invoice_div">
+        <div class="invoice_detail_div">
+            <div class="invoice_header_div">
+                <div class="invoice_heading_div">
+                <h1>Invoices</h1>
+                <p id="invoice_p_Tag">There are total <%=json.length%> voices</p>
+                </div>
+                <div class="invoice_filter_div">
+                    <div id="filterArrow"><p>Filter by status</p><img src="/Assets/icon-arrow-down.svg" class="arrowDown" onclick="showFilterDiv()"/></div>
+                <div id="filter_Div">
+                    <input type="checkbox"  name='status'value='paid'checked onclick="checkFilter()"/><p>Paid</p>
+                    <input type="checkbox"   name='status' value='Pending'checked onclick="checkFilter()"/><p>Pending</p>
+                    <input type="checkbox"   name='status' value='draft'checked onclick="checkFilter()"/><p>Draft</p>
+                </div>
+            </div>
+                <div class="invoice_create_div" onclick="partialContainerLoad()"><div><div class="invoice_plus_icon_div"><img src="/Assets/icon-plus.svg"/></div></div><b>New Invoice</b>
+            </div>
+           
+        </div>
+        <div class="invoice_list_div" >
+            <% json.forEach(function(element) { %>
+                <div class="invoice_list_element" onclick="getValue(this)" data-value="<%= element.id %>" status="<%= element.status%>">
+                    <b class="invoice_id" id="align_invoice_element">#<%= element.id %></b>
+                    <p id="align_invoice_element">Due <%= element.paymentDue%></p>
+                    <p id="align_invoice_element" ><%= element.clientName%></p>
+                    <h3 id="align_invoice_element">$<%= element.total%></h3>
+                    <div id="statusDivId"class="<%=(element.status == 'paid')?'paid':(element.status == 'draft')?'draft':'statusDiv'%>">
+                        <div id="statusDivIdPoint"class="<%=(element.status == 'paid')?'paidPoint':(element.status == 'draft')?'draftPoint':'statusDiv_Point'%>"></div>
+                        <b><%= element.status%></b>
+                       
+                    </div>
+                    <img src="/Assets/icon-arrow-right.svg" class="image_right_arrow arrow" id="align_invoice_element"/>
+                </div>
+                      
+             <% }); %>
+             
+          
+               
+        </div>
+    
+</div>
+<script>
+    let filterDiv = document.getElementById("filter_Div");
+    const showFilterDiv = ()=>{
+filterDiv.style.display = 'flex';
+    }
+filterDiv.addEventListener('dblclick',()=>{
+    filterDiv.style.display ='none';
+})
+const checkFilter = ()=>{
+
+    const checkboxes = document.querySelectorAll('input[name = status]:checked');
+    let value = [];
+    let invoice_p_Tag = document.getElementById('invoice_p_Tag')
+    for(const checkbox of checkboxes){
+        value.push(checkbox.value)
+    }
+    let index = 0;
+    let filter = 1;
+    let json =  (<%-JSON.stringify(json)%>);
+    console.log(value)
+    for(let element of json){
+    let invoiceElement = document.getElementsByClassName('invoice_list_element')[index];
+    let status = invoiceElement.getAttribute('status');
+    if(value.includes(status)){
+        invoiceElement.style.display = 'grid';
+        filter++;
+    }
+    else{
+        invoiceElement.style.display = 'none';
+    }
+     index++;
+    }
+    if(value.length == 3){
+        invoice_p_Tag.innerText = `There are ${json.length} invoices`;
+    }
+    else if(value.length == 0){
+       let invoice_div =  document.getElementsByClassName('invoice_list_div')[0];
+let img = document.createElement("img");
+img.src = "Assets/illustration-empty.svg";
+invoice_div.appendChild(img).setAttribute('class','emptyImage');
+}
+else if(value.length <= 1 ||value.length <=3  ){
+document.getElementsByClassName('emptyImage')[0].style.display = "none";
+}
+    else{
+        invoice_p_Tag.innerText = `There are ${json.length - (index+1 - filter)} invoices`;
+    }
+   console.log(filter,index)
+}
+</script>
+<script type="text/javascript" src="/JS/index.js"></script>

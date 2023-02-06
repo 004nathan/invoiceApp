@@ -1,0 +1,226 @@
+
+
+<link href="CSS/index.css" id="displayMode"rel="stylesheet" type="text/css" />
+<link
+  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap"
+  rel="stylesheet"
+/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<div id="container">
+  <div id="navi_bar">
+    <%- include('./partials/navibar');%> 
+    <%- include('./partials/newInvoiceStatus');%> 
+  </div>
+
+   <% let senderAddress = JSON.parse(result.senderAddrerss);%> 
+  <%let clientAddress = JSON.parse(result.clientAddress);%>
+   <% let items = JSON.parse(result.items);%>
+
+  <div id="invoice_div">
+    <div id="invoice_status_show_div">
+      <form action="/goback" method="post" class="form_status_show_div">
+        <div class="go_back_button_div">
+          <div class="go_back_div">
+            <button
+              type="submit"
+              name="id"
+              value="<%=result.id%>"
+              class="goback_btn"
+            >
+            <img src="Assets/icon-arrow-left.svg" class="arrow" />
+              <b>Go back</b>
+            </button>
+          </div>
+        </div>
+        <div class="status_button_div">
+          <div class="current_status_text_div">
+            <p>status</p>
+            <div
+              id="statusDivIdDiv"
+              class="<%=(result.status == 'paid')?'paid':(result.status == 'draft')?'draft':'statusDiv'%>"
+            >
+              <div
+              id="statusDivIdPointshow"
+                class="<%=(result.status == 'paid')?'paidPoint':(result.status == 'draft')?'draftPoint':'statusDiv_Point'%>"
+              ></div>
+              <b><%=result.status%></b>
+            </div>
+          </div>
+          <div class="Edit_delete_btndiv">
+  
+            <button
+              class="edit_btn"
+              onclick="partialContainerLoadForEdit()"
+              value="<%=result%>"
+              type="button"
+            >
+              Edit
+            </button>
+            <button
+              class="delete_btn"
+              onclick="showDelete(this.value)"
+              value="<%=result.id%>"
+              type="button"
+            >
+              Delete
+            </button>
+            <button
+              class="paid_btn"
+              type="<%=(result.status == 'paid')?'button':(result.status == 'draft')?'submit':'submit'%>"
+              name="status"
+              value="<%=result.id%>"
+            >
+              Mark as paid
+            </button>
+          </div>
+        </div>
+      </form>
+      <div class="status_detail_div">
+        <div class="status_client_detail_div">
+          <div class="status_id_decript_div">
+            <h3>#<%=result.id%></h3>
+            <p><%=result.description%></p>
+          </div>
+          <div class="status_from_address_detail_div">
+            <p><%=senderAddress.street%></p>
+            <p><%=senderAddress.city%></p>
+            <p><%=senderAddress.postCode%></p>
+            <p><%=senderAddress.country%></p>
+          </div>
+          <div class="invoice_date_div">
+            <div class="createdAt_div">
+              <p class="invoice_text">Invoice date</p>
+              <h3><%=result.createdAt%></h3>
+            </div>
+            <div class="createdAt_div">
+              <p class="invoice_text">Payment Due</p>
+              <h3><%=result.paymentDue%></h3>
+            </div>
+          </div>
+          <div class="status_to_address_detail_div">
+            <p class="invoice_text">Bill To</p>
+            <b class="invoice_text"><%=result.clientName%></b>
+            <p><%=clientAddress.street%></p>
+            <p><%=clientAddress.city%></p>
+            <p><%=clientAddress.postCode%></p>
+            <p><%=clientAddress.country%></p>
+          </div>
+          <div class="email_div">
+            <p class="invoice_text">Sent to</p>
+            <b><%=result.clientEmail%></b>
+          </div>
+        </div>
+        <div class="status_item_detail_div">
+
+       
+          <div class="total_div">
+            <table id="item_table">
+              <tr>
+                <th>ItemName</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+              </tr>
+              <%items.forEach(element => {%>
+              <tr>
+                <td><%=element.name%></td>
+                <td><%=element.quantity%></td>
+                <td><%=element.price%></td>
+                <td><%=element.total%></td>
+              </tr>
+              <% });%>
+            </table>
+            <div class="total_amount_div">
+              <p class="amount_due_text">Amount Due</p>
+              <h2 class="amount_text">$<%=result.total%></h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%- include('./partials/delete');%>
+  <script>
+ let editElement = Object.values(<%-JSON.stringify(result)%>);
+ let items = JSON.parse(editElement[10]);
+ let changeHeight = document.getElementsByClassName('status_detail_div')[0];
+  let navibar = document.getElementById('navi_bar');
+  let invoice_div =document.getElementById('invoice_div');
+ if(items.length  >1){
+  
+  invoice_div.style.height = items.length * 30 + 1020 + "px";
+  navibar.style.height = items.length * 30 + 1020 + "px"
+  changeHeight.style.height = items.length * 30 + 620 + "px"
+ }
+    const partialContainerLoadForEdit = () => {
+ 
+  console.log(editElement)
+  let senderAddress = JSON.parse(editElement[8]);
+  let clientAddress =JSON.parse(editElement[9]);
+  console.log(senderAddress.street);
+  
+  let new_invoice_whole_container = document.getElementById(
+    "new_invoice_whole_container"
+  );
+  let invoice_form = document.getElementById("new_invoice_form");
+  let editheading = document.getElementsByClassName("text_invoice")[0];
+  let senderStreet = document.getElementById("street_Address");
+  console.log(senderStreet)
+  let sendCity = document.getElementById("city");
+  let sendPostcode = document.getElementById("postcode");
+  let sendCountry = document.getElementById("country");
+  let clientStreet = document.getElementById("street_AddressTo");
+  let clientCity = document.getElementById("city_To");
+  let clientPostcode = document.getElementById("postcode_To");
+  let clientCountry = document.getElementById("country_To");
+  let clientName = document.getElementById("clientname");
+  let clientEmail = document.getElementById("clientEmail");
+  let createdAt = document.getElementById("createdAt");
+  let paymentDue = document.getElementById("paymentDue");
+  let description = document.getElementById("description");
+  let item_list = document.getElementsByClassName("item_list")[0];
+  senderStreet.value = senderAddress.street;
+  sendCity.value = senderAddress.city;
+  sendPostcode.value = senderAddress.postCode;
+  sendCountry.value = senderAddress.country;
+  clientStreet.value = clientAddress.street;
+  clientCity.value = clientAddress.city;
+  clientPostcode.value = clientAddress.postCode;
+  clientCountry.value = clientAddress.country;
+  clientName.value = editElement[5];
+  clientEmail.value = editElement[6];
+  createdAt.value = editElement[1];
+  paymentDue.value = editElement[2];
+  description.value = editElement[3];
+  new_invoice_whole_container.style.marginLeft = "2150px";
+  $(".item1").remove();
+  items.forEach((elem) => {
+    let item = ` <div class="item1"><input type="text" value="${elem.name}" name="name" required/><input type="number" value="${elem.quantity}"name="quantity" required/><input type="number" value="${elem.price}"name="price" required/><input type="number" name="total" value="${elem.total}" required/><img src="Assets/icon-delete.svg"onclick="deleteItem(this)" id='deleteIcon'/></div>`;
+    item_list.insertAdjacentHTML("beforeend", item);
+  });
+  invoice_form.action = "/update";
+  document.getElementById('draftButton').type = "button";
+  document.getElementsByClassName('invoice_button_div')[0].value =editElement[0]; 
+  editheading.innerText = `#Edit${editElement[0]}`;
+}; 
+let index = items.length;
+const showDelete = (value) => {
+  let delete_div = document.getElementById("delete_div");
+  let delete_button = document.getElementById("delete_button");
+  let invoice_blur_div = document.getElementById("invoice_blur_div");
+  delete_div.style.visibility = "visible";
+  invoice_blur_div.style.visibility = "visible";
+  delete_button.value = value;
+  console.log(delete_button);
+};
+const hideDelete = () => {
+  let delete_div = document.getElementById("delete_div");
+  let delete_button = document.getElementById("delete_button");
+  let invoice_blur_div = document.getElementById("invoice_blur_div");
+  delete_div.style.visibility = "hidden";
+  invoice_blur_div.style.visibility = "hidden";
+  console.log(delete_button);
+};
+  </script>
+</div>
+<script type="text/javascript" src="/JS/index.js"></script>

@@ -1,0 +1,52 @@
+
+<div id="new_invoice_whole_container">
+<div id="new_invoice_container">
+  <h2 class="text_invoice new_invoice_heading">New Invoice</h2>
+  <form method="post" action="responseIndex" id="new_invoice_form">
+    <b class="text_invoice" id="blueText">Bill from</b>
+    <div class="bill_from" >
+<input type="text" id="street_Address" name="street" placeholder="Street Address" required/>
+<input type="text" placeholder="city" name="city" id="city" required/>
+<input type="text" placeholder="Post code" name="postCode" id="postcode" required/>
+<input type="text" placeholder="Country" name="country" id="country" required/>
+    </div>
+    <b class="text_invoice" id="blueText">Bill To</b>
+    <div class="bill_to">
+      <input type="text" name="clientName" placeholder="Client's Name" id="clientname" required/>
+      <input type="email"name="clientEmail" placeholder="Client's Email" id="clientEmail" required/>
+      <input type="text" id="street_AddressTo" name="streetTo" placeholder="Street Address" required/>
+      <input type="text" placeholder="city" name="cityTo" id="city_To" required/>
+      <input type="text" placeholder="Post code" name="postCodeTo" id="postcode_To" required/>
+      <input type="text" placeholder="Country" name="countryTo" id="country_To" required/>
+     <div class="date_div">
+      <p>CreatedAt</p>
+      <input type="date" placeholder="Invoice Date" name="createdAt" id="createdAt" required/>
+      
+     </div>
+       <div class="date_div">
+        <p>PaymentDue</p>
+      <input type="date" placeholder="PaymentDue" name="paymentDue" id="paymentDue" required/>
+       </div>
+      <input type="text" placeholder="Project description" name="description" id="description" required/>
+           </div>
+           <h2 class="text_invoice">Item list</h2>
+           <div class="item_list_names"><p>Item Name</p><p>Qty</p><p>price</p><p>Total</p></div>
+           <div class="item_list_container">
+          
+           <div class="item_list">
+           
+            <div class="item1"><input type="text" name="name" required/><input type="number" name="quantity" min="1" required/><input type="number" name="price" min="1" required/><input type="number" name="total" min="1" required/><img src="Assets/icon-delete.svg"onclick="deleteItem(this)" id='deleteIcon'/></div>
+           </div>
+           <button type="button" onclick="createItem()"class="add_item_button">+ Add new item</button>
+          </div>
+          <div class="invoice_button_div" name="id" value="">
+          <button class="invoice_button" type="button" onclick="discardInvoice()" >Discard</button>
+          <button class="invoice_button" type="submit" onclick="asyncCall()" name="draft" value="draft" id="draftButton">Save asDraft</button>
+          <button class="invoice_button" type="submit" onclick="asyncCall()" name="Pending" value="Pending" id="pendingButton">Save & Send</button>
+        </div>
+  </form>
+</div>
+<div id="new_invoice_blur_container">
+
+</div>
+</div>
